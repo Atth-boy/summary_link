@@ -1,0 +1,18 @@
+{
+  "name": "สรุปงาน Project",
+  "short_name": "สรุปงาน",
+  "description": "สรุปรายการโปรเจกต์",
+  "start_url": "./สรุปงาน.html",
+  "display": "standalone",
+  "background_color": "#f2f2f7",
+  "theme_color": "#1c1c1e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "ภาพ/Generated_Image_y1p24uy1p24uy1p2.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

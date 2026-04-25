@@ -1,0 +1,10 @@
+สร้างไฟล์ HDML 
+หัวข้อ สรุปงาน Project
+1. KPI Dashboard PCD ปี 2569 โชว์สัญลักษณ์อยู่ระหว่างดำเนินงาน (พื้นหลังสีเหลือง) 
+ทำปุ่ม popup มีปุ่ม กดให้ไปยัง https://mea-kpi-dashboard69.techstatcore.com/ และ QR code
+2. ติดตามงาน กสฟ. โชว์สัญลักษณ์อยู่ระหว่างดำเนินงาน (พื้นหลังสีเหลือง) ทำปุ่ม popup 
+มีปุ่ม กดให้ไปยัง https://mea-followup69.techstatcore.com/ และ QR code
+3. สมุดบันทึกสำหรับศูนย์รักษาความปลอดภัยสถานีไฟฟ้า
+มีปุ่ม กดให้ไปยัง https://mea-notebook-securitycenter.techstatcore.com/ และ QR code
+
+หมายเหตุ : เอา theme ให้เหมาะ ios ทันสมัย
