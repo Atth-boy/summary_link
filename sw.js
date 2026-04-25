@@ -1,6 +1,6 @@
 const CACHE = 'project-v1';
 const ASSETS = [
-  './สรุปงาน.html',
+  './index.html',
   './manifest.json',
   './ภาพ/Generated_Image_y1p24uy1p24uy1p2.png'
 ];
@@ -19,6 +19,6 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('./สรุปงาน.html')))
+    caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('./index.html')))
   );
 });

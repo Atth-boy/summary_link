@@ -2,7 +2,7 @@
   "name": "สรุปงาน Project",
   "short_name": "สรุปงาน",
   "description": "สรุปรายการโปรเจกต์",
-  "start_url": "./สรุปงาน.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f2f2f7",
   "theme_color": "#1c1c1e",
