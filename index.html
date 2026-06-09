@@ -321,42 +321,91 @@
     }
     .btn-close:active { background: #e5e5ea; }
 
-    /* ── Update banner ── */
-    .update-banner {
+    /* ── Update overlay: เด้งเต็มจอ พื้นหลังเบลอ + แตะมาสคอตเพื่ออัปเดต ── */
+    .update-veil {
+      display: none;
       position: fixed;
-      left: 50%;
-      bottom: -120px;
-      transform: translateX(-50%);
-      width: calc(100% - 24px);
-      max-width: 520px;
-      background: rgba(28,28,30,.96);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
-      border-radius: 18px;
-      padding: 14px 16px;
+      inset: 0;
+      z-index: 2000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(20,20,30,.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .update-veil.show { display: flex; animation: veilIn .24s ease-out both; }
+    @keyframes veilIn { from { opacity: 0 } to { opacity: 1 } }
+
+    .update-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      max-width: 340px;
+    }
+
+    .mascot-btn {
+      position: relative;
+      width: 176px;
+      height: 196px;
+      border: none;
+      padding: 14px;
+      border-radius: 28px;
+      background: #FAF4E2;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
       display: flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.3);
-      z-index: 1000;
-      transition: bottom .35s cubic-bezier(.32,1.2,.5,1);
+      justify-content: center;
+      box-shadow: 0 12px 36px rgba(0,0,0,.4);
+      animation: mascotPulse 1.8s ease-in-out infinite;
     }
-    .update-banner.show { bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); }
-    .update-banner .ub-text { flex: 1; min-width: 0; }
-    .update-banner .ub-title { font-size: 14px; font-weight: 600; }
-    .update-banner .ub-sub { font-size: 12px; color: #c7c7cc; margin-top: 2px; }
-    .update-banner button {
-      flex-shrink: 0;
+    .mascot-btn:active { transform: scale(.95); animation: none; }
+    .mascot-btn:disabled { animation: none; cursor: default; }
+    @keyframes mascotPulse {
+      0%,100% { transform: scale(1);    box-shadow: 0 0 0 0   rgba(232,169,60,.55), 0 12px 36px rgba(0,0,0,.4); }
+      50%     { transform: scale(1.04); box-shadow: 0 0 0 16px rgba(232,169,60,0),   0 12px 36px rgba(0,0,0,.4); }
+    }
+    .mascot-svg { width: 100%; height: 100%; display: block; pointer-events: none; }
+
+    .mascot-spinner {
+      display: none;
+      position: absolute;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      border-radius: 28px;
+      background: rgba(250,244,226,.72);
+    }
+    .mascot-spinner.show { display: flex; }
+    .mascot-spinner .spin {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 4px solid rgba(31,26,23,.2);
+      border-top-color: #D65A2A;
+      animation: ubSpin .8s linear infinite;
+    }
+    @keyframes ubSpin { to { transform: rotate(360deg) } }
+
+    .update-title { color: #fff; font-size: 22px; font-weight: 700; }
+    .update-sub   { color: rgba(255,255,255,.88); font-size: 15px; line-height: 1.5; }
+    .update-ack {
+      margin-top: 4px;
+      background: #D65A2A;
+      color: #fff;
       border: none;
       border-radius: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 10px 16px;
+      padding: 12px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      min-height: 48px;
       cursor: pointer;
     }
-    .ub-reload { background: #007aff; color: #fff; }
-    .ub-reload:active { background: #0062cc; }
+    .update-ack:active { background: #b84a22; }
 
     /* ── Footer note ── */
     .footer-note {
@@ -391,20 +440,80 @@
   </symbol>
   <!-- chevron-right -->
   <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
-  <!-- sparkles — มีอัปเดตใหม่ -->
-  <symbol id="i-sparkles" viewBox="0 0 24 24">
-    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
-    <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
-  </symbol>
 </svg>
 
-<!-- Update banner -->
-<div class="update-banner" id="updateBanner">
-  <div class="ub-text">
-    <div class="ub-title"><svg class="icon"><use href="#i-sparkles"/></svg> มีอัปเดตใหม่</div>
-    <div class="ub-sub">แตะเพื่อโหลดเวอร์ชันล่าสุด</div>
+<!-- Update overlay (เด้งเต็มจอเมื่อมีเวอร์ชันใหม่) -->
+<div class="update-veil" id="updateVeil" role="alertdialog" aria-label="มีเวอร์ชันใหม่" aria-hidden="true">
+  <div class="update-card">
+    <button type="button" class="mascot-btn" id="ubReload" aria-label="แตะเพื่ออัปเดต">
+      <!-- Atom mascot (wave pose) -->
+      <svg class="mascot-svg" viewBox="-20 -20 280 340" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#1F1A17" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <!-- antenna -->
+          <g>
+            <line x1="120" y1="20" x2="120" y2="48"/>
+            <circle cx="120" cy="14" r="8" fill="#E8A93C"/>
+          </g>
+          <!-- head -->
+          <g>
+            <rect x="74" y="48" width="92" height="80" rx="22" fill="#E8A93C"/>
+            <rect x="84" y="60" width="72" height="56" rx="10" fill="#FAF4E2"/>
+            <circle cx="74" cy="88" r="5" fill="#D65A2A"/>
+            <circle cx="166" cy="88" r="5" fill="#D65A2A"/>
+          </g>
+          <!-- face (wave) -->
+          <g>
+            <path d="M 96 86 Q 104 80 112 86"/>
+            <path d="M 128 86 Q 136 80 144 86"/>
+            <path d="M 100 104 Q 120 116 140 104"/>
+          </g>
+          <!-- body -->
+          <g>
+            <rect x="106" y="128" width="28" height="10" rx="2" fill="#FAF4E2"/>
+            <path d="M 72 142 L 168 142 L 178 240 L 62 240 Z" fill="#4A9B9B"/>
+            <rect x="94" y="156" width="52" height="64" rx="5" fill="#FAF4E2"/>
+            <circle cx="106" cy="172" r="5" fill="#D65A2A"/>
+            <circle cx="134" cy="172" r="5" fill="#E8A93C"/>
+            <rect x="100" y="186" width="40" height="10" rx="2" fill="#1F1A17" stroke="none"/>
+            <rect x="102" y="188" width="20" height="6" fill="#E8A93C" stroke="none"/>
+            <line x1="110" y1="206" x2="130" y2="206"/>
+            <circle cx="116" cy="206" r="3" fill="#1F1A17"/>
+            <circle cx="68" cy="148" r="10" fill="#D65A2A"/>
+            <circle cx="172" cy="148" r="10" fill="#D65A2A"/>
+          </g>
+          <!-- arms (wave: left down, right up) -->
+          <g>
+            <path d="M 58 156 L 46 168 L 58 176 L 46 188 L 58 196 L 46 208"/>
+            <g>
+              <circle cx="46" cy="216" r="9" fill="#E8A93C"/>
+              <line x1="40" y1="222" x2="36" y2="232"/>
+              <line x1="46" y1="225" x2="46" y2="234"/>
+              <line x1="52" y1="222" x2="56" y2="232"/>
+            </g>
+            <path d="M 182 156 L 196 144 L 188 130 L 202 116 L 196 102"/>
+            <g>
+              <circle cx="202" cy="92" r="11" fill="#E8A93C"/>
+              <line x1="196" y1="86" x2="190" y2="78"/>
+              <line x1="202" y1="82" x2="202" y2="74"/>
+              <line x1="208" y1="86" x2="214" y2="78"/>
+            </g>
+          </g>
+          <!-- legs + feet -->
+          <g>
+            <rect x="78" y="240" width="84" height="12" rx="3" fill="#1F1A17"/>
+            <rect x="86" y="252" width="24" height="42" rx="4" fill="#E8A93C"/>
+            <rect x="130" y="252" width="24" height="42" rx="4" fill="#E8A93C"/>
+            <ellipse cx="98" cy="298" rx="22" ry="8" fill="#1F1A17"/>
+            <ellipse cx="142" cy="298" rx="22" ry="8" fill="#1F1A17"/>
+          </g>
+        </g>
+      </svg>
+      <span class="mascot-spinner" id="ubSpinner"><span class="spin"></span></span>
+    </button>
+    <p class="update-title" id="ubTitle">มีเวอร์ชันใหม่</p>
+    <p class="update-sub" id="ubSub">แตะที่หุ่นยนต์เพื่ออัปเดตเป็นเวอร์ชันล่าสุด</p>
+    <button type="button" class="update-ack" id="ubAck" hidden>รับทราบ</button>
   </div>
-  <button class="ub-reload" id="ubReload">อัปเดต</button>
 </div>
 
 <!-- Header -->
@@ -727,53 +836,96 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop.open').forEach(m => closeModal(m.id));
   });
-  // ── ตรวจสอบอัปเดต PWA ทุกครั้งที่เข้า/กลับมาที่ app ──
+  // ── ตรวจสอบอัปเดต PWA + overlay เด้งเต็มจอ (แตะมาสคอตเพื่ออัปเดต) ──
   if ('serviceWorker' in navigator) {
-    const banner = document.getElementById('updateBanner');
+    const veil  = document.getElementById('updateVeil');
+    const btn   = document.getElementById('ubReload');
+    const spin  = document.getElementById('ubSpinner');
+    const title = document.getElementById('ubTitle');
+    const sub   = document.getElementById('ubSub');
+    const ack   = document.getElementById('ubAck');
+
+    let swReg = null;
     let waitingWorker = null;
     let userTriggeredUpdate = false;
+    let refreshing = false;
 
-    function showUpdateBanner(worker) {
-      waitingWorker = worker;
-      banner.classList.add('show');
+    function reloadOnce() {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
     }
 
-    document.getElementById('ubReload').addEventListener('click', () => {
-      if (waitingWorker) {
-        userTriggeredUpdate = true;
-        waitingWorker.postMessage('SKIP_WAITING');
-      }
+    function showUpdate(worker) {
+      waitingWorker = worker;
+      veil.classList.add('show');
+      veil.setAttribute('aria-hidden', 'false');
+    }
+
+    // แตะมาสคอต → สั่ง SW ใหม่ทำงาน
+    function doUpdate() {
+      if (userTriggeredUpdate || !waitingWorker) return;
+      userTriggeredUpdate = true;
+      btn.disabled = true;
+      spin.classList.add('show');
+      title.textContent = 'กำลังอัปเดต…';
+      sub.textContent = 'รอสักครู่ ระบบกำลังโหลดเวอร์ชันล่าสุด';
+      waitingWorker.postMessage('SKIP_WAITING');
+
+      // iOS standalone บางครั้งไม่ยิง controllerchange — poll reg.waiting แทน
+      // หาย waiting = SW ใหม่ active แล้ว → reload ปลอดภัย; ถ้ายังค้าง = ต้องปิด-เปิดแอป
+      let tries = 0;
+      const tick = () => {
+        if (!swReg || !swReg.waiting) { reloadOnce(); return; }
+        if (++tries >= 5) { showRestart(); return; }
+        setTimeout(tick, 700);
+      };
+      setTimeout(tick, 700);
+    }
+
+    // เคส iOS: activate ตอนแอปเปิดอยู่ไม่ได้ → บอกให้ปิด-เปิดแอปใหม่
+    function showRestart() {
+      spin.classList.remove('show');
+      btn.style.display = 'none';
+      title.textContent = 'อัปเดตพร้อมแล้ว';
+      sub.textContent = 'ปิดแอปแล้วเปิดใหม่อีกครั้ง เพื่อใช้เวอร์ชันล่าสุด';
+      ack.hidden = false;
+    }
+
+    btn.addEventListener('click', doUpdate);
+    ack.addEventListener('click', () => {
+      veil.classList.remove('show');
+      veil.setAttribute('aria-hidden', 'true');
     });
 
     navigator.serviceWorker.register('./sw.js').then(reg => {
+      swReg = reg;
+
       // ถ้ามีตัวรออยู่แล้วตอนเปิด app
-      if (reg.waiting && navigator.serviceWorker.controller) {
-        showUpdateBanner(reg.waiting);
-      }
+      if (reg.waiting && navigator.serviceWorker.controller) showUpdate(reg.waiting);
 
       // เจอ service worker เวอร์ชันใหม่กำลังติดตั้ง
       reg.addEventListener('updatefound', () => {
         const nw = reg.installing;
         if (!nw) return;
         nw.addEventListener('statechange', () => {
-          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-            showUpdateBanner(nw);
-          }
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) showUpdate(nw);
         });
       });
 
-      // ตรวจสอบอัปเดตทันทีที่โหลด
-      reg.update();
-      // และทุกครั้งที่กลับมาเปิด app (PWA บน iPhone)
+      // เช็คอัปเดต: ตอนโหลด + ทุกครั้งที่กลับมาเปิด app + ทุก 1 ชม.
+      const check = () => { if (navigator.onLine) reg.update(); };
+      check();
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') reg.update();
+        if (document.visibilityState === 'visible') check();
       });
+      setInterval(check, 60 * 60 * 1000);
     });
 
     // รีโหลดเฉพาะตอนที่ผู้ใช้กดอัปเดตเอง
     // (ไม่รีโหลดตอน first install ที่ clients.claim() ทำให้ controllerchange ทำงาน)
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (userTriggeredUpdate) window.location.reload();
+      if (userTriggeredUpdate) reloadOnce();
     });
   }
 </script>
