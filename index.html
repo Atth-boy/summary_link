@@ -284,6 +284,30 @@
       word-break: break-all;
       text-align: center;
     }
+    .qr-url-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #e3f0ff;
+      color: #007aff;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .15s, color .15s;
+    }
+    .btn-copy:active { background: #cfe4ff; }
+    .btn-copy.copied { background: #d1f5e4; color: #186f3d; }
 
     /* Action button */
     .btn-open {
@@ -440,6 +464,11 @@
   </symbol>
   <!-- chevron-right -->
   <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <!-- copy -->
+  <symbol id="i-copy" viewBox="0 0 24 24">
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+  </symbol>
 </svg>
 
 <!-- Update overlay (เด้งเต็มจอเมื่อมีเวอร์ชันใหม่) -->
@@ -533,7 +562,7 @@
       <div class="card-title">KPI Dashboard PCD ปี 2569</div>
       <div class="card-sub">mea-kpi-dashboard69.techstatcore.com</div>
     </div>
-    <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>กำลังดำเนินงาน</span>
+    <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
     <span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span>
   </div>
 
@@ -544,7 +573,7 @@
       <div class="card-title">ติดตามงาน กสฟ.</div>
       <div class="card-sub">mea-followup69.techstatcore.com</div>
     </div>
-    <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>กำลังดำเนินงาน</span>
+    <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
     <span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span>
   </div>
 
@@ -576,7 +605,7 @@
       <div class="card-title">เว็บกองสถานีไฟฟ้า</div>
       <div class="card-sub"></div>
     </div>
-    <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>กำลังดำเนินงาน</span>
+    <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>ระหว่างดำเนินการ</span>
   </div>
 
 </div>
@@ -637,7 +666,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>อยู่ระหว่างดำเนินงาน</span>
+        <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
       </div>
       <div class="modal-title">KPI Dashboard PCD ปี 2569</div>
       <div class="modal-sub">แดชบอร์ดติดตาม KPI สำหรับปีงบประมาณ 2569</div>
@@ -646,7 +675,10 @@
       <div class="qr-box">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://mea-kpi-dashboard69.techstatcore.com/" alt="QR Code KPI Dashboard" />
         <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
-        <div class="qr-url">https://mea-kpi-dashboard69.techstatcore.com/</div>
+        <div class="qr-url-row">
+          <span class="qr-url">https://mea-kpi-dashboard69.techstatcore.com/</span>
+          <button class="btn-copy" onclick="copyUrl(this)" aria-label="คัดลอกลิงก์"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
       </div>
       <a class="btn-open" href="https://mea-kpi-dashboard69.techstatcore.com/" target="_blank">
         เปิดเว็บไซต์
@@ -662,7 +694,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>อยู่ระหว่างดำเนินงาน</span>
+        <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
       </div>
       <div class="modal-title">ติดตามงาน กสฟ.</div>
       <div class="modal-sub">ระบบติดตามงานสำหรับกองสายส่งและฝ่ายต่างๆ</div>
@@ -671,7 +703,10 @@
       <div class="qr-box">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://mea-followup69.techstatcore.com/" alt="QR Code ติดตามงาน" />
         <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
-        <div class="qr-url">https://mea-followup69.techstatcore.com/</div>
+        <div class="qr-url-row">
+          <span class="qr-url">https://mea-followup69.techstatcore.com/</span>
+          <button class="btn-copy" onclick="copyUrl(this)" aria-label="คัดลอกลิงก์"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
       </div>
       <a class="btn-open" href="https://mea-followup69.techstatcore.com/" target="_blank">
         เปิดเว็บไซต์
@@ -696,7 +731,10 @@
       <div class="qr-box">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://mea-notebook-securitycenter.techstatcore.com/" alt="QR Code สมุดบันทึก" />
         <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
-        <div class="qr-url">https://mea-notebook-securitycenter.techstatcore.com/</div>
+        <div class="qr-url-row">
+          <span class="qr-url">https://mea-notebook-securitycenter.techstatcore.com/</span>
+          <button class="btn-copy" onclick="copyUrl(this)" aria-label="คัดลอกลิงก์"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
       </div>
       <a class="btn-open" href="https://mea-notebook-securitycenter.techstatcore.com/" target="_blank">
         เปิดเว็บไซต์
@@ -721,7 +759,10 @@
       <div class="qr-box">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://pebble-familyfinance.techstatcore.com/" alt="QR Code Pebble Finance" />
         <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
-        <div class="qr-url">https://pebble-familyfinance.techstatcore.com/</div>
+        <div class="qr-url-row">
+          <span class="qr-url">https://pebble-familyfinance.techstatcore.com/</span>
+          <button class="btn-copy" onclick="copyUrl(this)" aria-label="คัดลอกลิงก์"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
       </div>
       <a class="btn-open" href="https://pebble-familyfinance.techstatcore.com/" target="_blank">เปิดเว็บไซต์</a>
       <button class="btn-close" onclick="closeModal('modalp1')">ปิด</button>
@@ -744,7 +785,10 @@
       <div class="qr-box">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://acorn-finance.techstatcore.com/" alt="QR Code Acorn Finance" />
         <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
-        <div class="qr-url">https://acorn-finance.techstatcore.com/</div>
+        <div class="qr-url-row">
+          <span class="qr-url">https://acorn-finance.techstatcore.com/</span>
+          <button class="btn-copy" onclick="copyUrl(this)" aria-label="คัดลอกลิงก์"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
       </div>
       <a class="btn-open" href="https://acorn-finance.techstatcore.com/" target="_blank">เปิดเว็บไซต์</a>
       <button class="btn-close" onclick="closeModal('modalp2')">ปิด</button>
@@ -767,7 +811,10 @@
       <div class="qr-box">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://vaultnotebook.web.app/" alt="QR Code VaultNotebook" />
         <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
-        <div class="qr-url">https://vaultnotebook.web.app/</div>
+        <div class="qr-url-row">
+          <span class="qr-url">https://vaultnotebook.web.app/</span>
+          <button class="btn-copy" onclick="copyUrl(this)" aria-label="คัดลอกลิงก์"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
       </div>
       <a class="btn-open" href="https://vaultnotebook.web.app/" target="_blank">เปิดเว็บไซต์</a>
       <button class="btn-close" onclick="closeModal('modalp3')">ปิด</button>
@@ -790,7 +837,10 @@
       <div class="qr-box">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://suantarachorder.web.app/" alt="QR Code Suantarach" />
         <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
-        <div class="qr-url">https://suantarachorder.web.app/</div>
+        <div class="qr-url-row">
+          <span class="qr-url">https://suantarachorder.web.app/</span>
+          <button class="btn-copy" onclick="copyUrl(this)" aria-label="คัดลอกลิงก์"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
       </div>
       <a class="btn-open" href="https://suantarachorder.web.app/" target="_blank">เปิดเว็บไซต์</a>
       <button class="btn-close" onclick="closeModal('modalp4')">ปิด</button>
@@ -813,7 +863,10 @@
       <div class="qr-box">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://mysite-log.web.app/" alt="QR Code MySite-Log" />
         <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
-        <div class="qr-url">https://mysite-log.web.app/</div>
+        <div class="qr-url-row">
+          <span class="qr-url">https://mysite-log.web.app/</span>
+          <button class="btn-copy" onclick="copyUrl(this)" aria-label="คัดลอกลิงก์"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
       </div>
       <a class="btn-open" href="https://mysite-log.web.app/" target="_blank">เปิดเว็บไซต์</a>
       <button class="btn-close" onclick="closeModal('modalp5')">ปิด</button>
@@ -836,6 +889,34 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop.open').forEach(m => closeModal(m.id));
   });
+  // คัดลอกลิงก์ (อ่าน URL จาก .qr-url ข้างปุ่ม) + แสดงผลตอบรับชั่วคราว
+  function copyUrl(btn) {
+    const url = btn.parentElement.querySelector('.qr-url').textContent.trim();
+    const done = () => {
+      btn.classList.add('copied');
+      btn.querySelector('use').setAttribute('href', '#i-check');
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.querySelector('use').setAttribute('href', '#i-copy');
+      }, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done).catch(() => fallbackCopy(url, done));
+    } else {
+      fallbackCopy(url, done);
+    }
+  }
+  function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { if (document.execCommand('copy')) done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
   // ── ตรวจสอบอัปเดต PWA + overlay เด้งเต็มจอ (แตะมาสคอตเพื่ออัปเดต) ──
   if ('serviceWorker' in navigator) {
     const veil  = document.getElementById('updateVeil');
