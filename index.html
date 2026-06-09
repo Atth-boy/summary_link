@@ -137,6 +137,48 @@
       margin-left: 4px;
     }
 
+    /* ── Horizontal scroll row (งานส่วนตัว) ── */
+    .scroll-row {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 4px 16px 8px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .scroll-row::-webkit-scrollbar { display: none; }
+
+    .scroll-card {
+      flex: 0 0 auto;
+      width: 180px;
+      background: #fff;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      cursor: pointer;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform .12s, box-shadow .15s;
+    }
+    .scroll-card:active { transform: scale(.97); }
+    .scroll-card .card-icon-wrap { width: 48px; height: 48px; font-size: 18px; border-radius: 14px; }
+    .scroll-card .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1c1c1e;
+      line-height: 1.35;
+    }
+    .scroll-card .card-sub {
+      font-size: 11.5px;
+      color: #8e8e93;
+      word-break: break-all;
+      line-height: 1.3;
+    }
+    .scroll-card .badge { align-self: flex-start; }
+
     /* ── Modal backdrop ── */
     .modal-backdrop {
       display: none;
@@ -262,6 +304,43 @@
     }
     .btn-close:active { background: #e5e5ea; }
 
+    /* ── Update banner ── */
+    .update-banner {
+      position: fixed;
+      left: 50%;
+      bottom: -120px;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 520px;
+      background: rgba(28,28,30,.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.3);
+      z-index: 1000;
+      transition: bottom .35s cubic-bezier(.32,1.2,.5,1);
+    }
+    .update-banner.show { bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); }
+    .update-banner .ub-text { flex: 1; min-width: 0; }
+    .update-banner .ub-title { font-size: 14px; font-weight: 600; }
+    .update-banner .ub-sub { font-size: 12px; color: #c7c7cc; margin-top: 2px; }
+    .update-banner button {
+      flex-shrink: 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+    .ub-reload { background: #007aff; color: #fff; }
+    .ub-reload:active { background: #0062cc; }
+
     /* ── Footer note ── */
     .footer-note {
       text-align: center;
@@ -273,6 +352,15 @@
   </style>
 </head>
 <body>
+
+<!-- Update banner -->
+<div class="update-banner" id="updateBanner">
+  <div class="ub-text">
+    <div class="ub-title">มีอัปเดตใหม่ 🎉</div>
+    <div class="ub-sub">แตะเพื่อโหลดเวอร์ชันล่าสุด</div>
+  </div>
+  <button class="ub-reload" id="ubReload">อัปเดต</button>
+</div>
 
 <!-- Header -->
 <div class="header">
@@ -340,6 +428,53 @@
 </div>
 
 <div class="footer-note">กดที่การ์ดเพื่อดูรายละเอียดและ QR Code</div>
+
+<!-- Section: งานส่วนตัว -->
+<div class="section-label">งานส่วนตัว · เลื่อนดูด้านขวา →</div>
+
+<div class="scroll-row">
+
+  <!-- Personal 1 -->
+  <div class="scroll-card" onclick="openModal('modalp1')">
+    <div class="card-icon-wrap">P1</div>
+    <span class="badge badge-green">✓ เสร็จแล้ว</span>
+    <div class="card-title">Pebble Finance</div>
+    <div class="card-sub">pebble-familyfinance.techstatcore.com</div>
+  </div>
+
+  <!-- Personal 2 -->
+  <div class="scroll-card" onclick="openModal('modalp2')">
+    <div class="card-icon-wrap">P2</div>
+    <span class="badge badge-green">✓ เสร็จแล้ว</span>
+    <div class="card-title">Acorn Finance</div>
+    <div class="card-sub">acorn-finance.techstatcore.com</div>
+  </div>
+
+  <!-- Personal 3 -->
+  <div class="scroll-card" onclick="openModal('modalp3')">
+    <div class="card-icon-wrap">P3</div>
+    <span class="badge badge-green">✓ เสร็จแล้ว</span>
+    <div class="card-title">VaultNotebook</div>
+    <div class="card-sub">vaultnotebook.web.app</div>
+  </div>
+
+  <!-- Personal 4 -->
+  <div class="scroll-card" onclick="openModal('modalp4')">
+    <div class="card-icon-wrap">P4</div>
+    <span class="badge badge-green">✓ เสร็จแล้ว</span>
+    <div class="card-title">Suantarach</div>
+    <div class="card-sub">suantarachorder.web.app</div>
+  </div>
+
+  <!-- Personal 5 -->
+  <div class="scroll-card" onclick="openModal('modalp5')">
+    <div class="card-icon-wrap">P5</div>
+    <span class="badge badge-yellow">⏳ ระหว่างดำเนินการ</span>
+    <div class="card-title">MySite-Log</div>
+    <div class="card-sub">mysite-log.web.app</div>
+  </div>
+
+</div>
 
 
 <!-- ════ Modal 1 ════ -->
@@ -417,6 +552,121 @@
   </div>
 </div>
 
+<!-- ════ Modal P1 ════ -->
+<div class="modal-backdrop" id="modalp1" onclick="closeOnBackdrop(event,'modalp1')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-badge-row">
+        <span class="badge badge-green">✓ เสร็จแล้ว</span>
+      </div>
+      <div class="modal-title">Pebble Finance</div>
+      <div class="modal-sub">ระบบจัดการการเงินครอบครัว</div>
+    </div>
+    <div class="modal-body">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://pebble-familyfinance.techstatcore.com/" alt="QR Code Pebble Finance" />
+        <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
+        <div class="qr-url">https://pebble-familyfinance.techstatcore.com/</div>
+      </div>
+      <a class="btn-open" href="https://pebble-familyfinance.techstatcore.com/" target="_blank">เปิดเว็บไซต์</a>
+      <button class="btn-close" onclick="closeModal('modalp1')">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ Modal P2 ════ -->
+<div class="modal-backdrop" id="modalp2" onclick="closeOnBackdrop(event,'modalp2')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-badge-row">
+        <span class="badge badge-green">✓ เสร็จแล้ว</span>
+      </div>
+      <div class="modal-title">Acorn Finance</div>
+      <div class="modal-sub">ระบบจัดการการเงิน</div>
+    </div>
+    <div class="modal-body">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://acorn-finance.techstatcore.com/" alt="QR Code Acorn Finance" />
+        <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
+        <div class="qr-url">https://acorn-finance.techstatcore.com/</div>
+      </div>
+      <a class="btn-open" href="https://acorn-finance.techstatcore.com/" target="_blank">เปิดเว็บไซต์</a>
+      <button class="btn-close" onclick="closeModal('modalp2')">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ Modal P3 ════ -->
+<div class="modal-backdrop" id="modalp3" onclick="closeOnBackdrop(event,'modalp3')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-badge-row">
+        <span class="badge badge-green">✓ เสร็จแล้ว</span>
+      </div>
+      <div class="modal-title">VaultNotebook</div>
+      <div class="modal-sub">สมุดบันทึกดิจิทัล</div>
+    </div>
+    <div class="modal-body">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://vaultnotebook.web.app/" alt="QR Code VaultNotebook" />
+        <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
+        <div class="qr-url">https://vaultnotebook.web.app/</div>
+      </div>
+      <a class="btn-open" href="https://vaultnotebook.web.app/" target="_blank">เปิดเว็บไซต์</a>
+      <button class="btn-close" onclick="closeModal('modalp3')">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ Modal P4 ════ -->
+<div class="modal-backdrop" id="modalp4" onclick="closeOnBackdrop(event,'modalp4')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-badge-row">
+        <span class="badge badge-green">✓ เสร็จแล้ว</span>
+      </div>
+      <div class="modal-title">Suantarach</div>
+      <div class="modal-sub">ระบบรับออเดอร์ สวนตะรัจ</div>
+    </div>
+    <div class="modal-body">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://suantarachorder.web.app/" alt="QR Code Suantarach" />
+        <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
+        <div class="qr-url">https://suantarachorder.web.app/</div>
+      </div>
+      <a class="btn-open" href="https://suantarachorder.web.app/" target="_blank">เปิดเว็บไซต์</a>
+      <button class="btn-close" onclick="closeModal('modalp4')">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ Modal P5 ════ -->
+<div class="modal-backdrop" id="modalp5" onclick="closeOnBackdrop(event,'modalp5')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-badge-row">
+        <span class="badge badge-yellow">⏳ ระหว่างดำเนินการ</span>
+      </div>
+      <div class="modal-title">MySite-Log</div>
+      <div class="modal-sub">แอปติดตามงานก่อสร้าง</div>
+    </div>
+    <div class="modal-body">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://mysite-log.web.app/" alt="QR Code MySite-Log" />
+        <div class="qr-label">สแกน QR Code เพื่อเปิดลิงก์</div>
+        <div class="qr-url">https://mysite-log.web.app/</div>
+      </div>
+      <a class="btn-open" href="https://mysite-log.web.app/" target="_blank">เปิดเว็บไซต์</a>
+      <button class="btn-close" onclick="closeModal('modalp5')">ปิด</button>
+    </div>
+  </div>
+</div>
+
 <script>
   function openModal(id) {
     document.getElementById(id).classList.add('open');
@@ -432,8 +682,54 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop.open').forEach(m => closeModal(m.id));
   });
+  // ── ตรวจสอบอัปเดต PWA ทุกครั้งที่เข้า/กลับมาที่ app ──
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
+    const banner = document.getElementById('updateBanner');
+    let waitingWorker = null;
+    let userTriggeredUpdate = false;
+
+    function showUpdateBanner(worker) {
+      waitingWorker = worker;
+      banner.classList.add('show');
+    }
+
+    document.getElementById('ubReload').addEventListener('click', () => {
+      if (waitingWorker) {
+        userTriggeredUpdate = true;
+        waitingWorker.postMessage('SKIP_WAITING');
+      }
+    });
+
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      // ถ้ามีตัวรออยู่แล้วตอนเปิด app
+      if (reg.waiting && navigator.serviceWorker.controller) {
+        showUpdateBanner(reg.waiting);
+      }
+
+      // เจอ service worker เวอร์ชันใหม่กำลังติดตั้ง
+      reg.addEventListener('updatefound', () => {
+        const nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener('statechange', () => {
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+            showUpdateBanner(nw);
+          }
+        });
+      });
+
+      // ตรวจสอบอัปเดตทันทีที่โหลด
+      reg.update();
+      // และทุกครั้งที่กลับมาเปิด app (PWA บน iPhone)
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') reg.update();
+      });
+    });
+
+    // รีโหลดเฉพาะตอนที่ผู้ใช้กดอัปเดตเอง
+    // (ไม่รีโหลดตอน first install ที่ clients.claim() ทำให้ controllerchange ทำงาน)
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (userTriggeredUpdate) window.location.reload();
+    });
   }
 </script>
 </body>
