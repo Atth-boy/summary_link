@@ -1,5 +1,5 @@
 // เปลี่ยนเลขเวอร์ชันนี้ทุกครั้งที่ deploy เพื่อให้ iPhone เด้งแจ้งเตือนอัปเดต
-const CACHE = 'project-v2';
+const CACHE = 'project-v3';
 const ASSETS = [
   './index.html',
   './manifest.json',

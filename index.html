@@ -124,6 +124,21 @@
       border-radius: 20px;
       white-space: nowrap;
       flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── Lucide inline icons ── */
+    .icon {
+      width: 1em;
+      height: 1em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
     }
     .badge-yellow  { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
     .badge-green   { background: #d1f5e4; color: #186f3d; border: 1px solid #34c759; }
@@ -135,6 +150,8 @@
       font-size: 16px;
       flex-shrink: 0;
       margin-left: 4px;
+      display: inline-flex;
+      align-items: center;
     }
 
     /* ── Horizontal scroll row (งานส่วนตัว) ── */
@@ -353,10 +370,38 @@
 </head>
 <body>
 
+<!-- Lucide icon sprite (inline, offline-safe) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- hourglass — กำลังดำเนินงาน -->
+  <symbol id="i-progress" viewBox="0 0 24 24">
+    <path d="M5 22h14"/><path d="M5 2h14"/>
+    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/>
+    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/>
+  </symbol>
+  <!-- check — เสร็จแล้ว -->
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <!-- flask-conical — ทดลองการใช้งาน -->
+  <symbol id="i-flask" viewBox="0 0 24 24">
+    <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/>
+    <path d="M6.453 15h11.094"/><path d="M8.5 2h7"/>
+  </symbol>
+  <!-- pause — รอตรวจสอบ -->
+  <symbol id="i-pause" viewBox="0 0 24 24">
+    <rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/>
+  </symbol>
+  <!-- chevron-right -->
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <!-- sparkles — มีอัปเดตใหม่ -->
+  <symbol id="i-sparkles" viewBox="0 0 24 24">
+    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+    <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
+  </symbol>
+</svg>
+
 <!-- Update banner -->
 <div class="update-banner" id="updateBanner">
   <div class="ub-text">
-    <div class="ub-title">มีอัปเดตใหม่ 🎉</div>
+    <div class="ub-title"><svg class="icon"><use href="#i-sparkles"/></svg> มีอัปเดตใหม่</div>
     <div class="ub-sub">แตะเพื่อโหลดเวอร์ชันล่าสุด</div>
   </div>
   <button class="ub-reload" id="ubReload">อัปเดต</button>
@@ -379,8 +424,8 @@
       <div class="card-title">KPI Dashboard PCD ปี 2569</div>
       <div class="card-sub">mea-kpi-dashboard69.techstatcore.com</div>
     </div>
-    <span class="badge badge-yellow">⏳ กำลังดำเนินงาน</span>
-    <span class="chevron">›</span>
+    <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>กำลังดำเนินงาน</span>
+    <span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span>
   </div>
 
   <!-- Card 2 -->
@@ -390,8 +435,8 @@
       <div class="card-title">ติดตามงาน กสฟ.</div>
       <div class="card-sub">mea-followup69.techstatcore.com</div>
     </div>
-    <span class="badge badge-yellow">⏳ กำลังดำเนินงาน</span>
-    <span class="chevron">›</span>
+    <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>กำลังดำเนินงาน</span>
+    <span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span>
   </div>
 
   <!-- Card 3 -->
@@ -401,8 +446,8 @@
       <div class="card-title">สมุดบันทึก ศูนย์รักษาความปลอดภัยสถานีไฟฟ้า</div>
       <div class="card-sub">mea-notebook-securitycenter.techstatcore.com</div>
     </div>
-    <span class="badge badge-blue">🧪 ทดลองการใช้งาน</span>
-    <span class="chevron">›</span>
+    <span class="badge badge-blue"><svg class="icon"><use href="#i-flask"/></svg>ทดลองการใช้งาน</span>
+    <span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span>
   </div>
 
   <!-- Card 4 -->
@@ -412,7 +457,7 @@
       <div class="card-title">Line Chatbot แจ้งสถานะช่างไฟฟ้า</div>
       <div class="card-sub">รอหน่วยงาน ฝมธ. ตรวจสอบระบบ</div>
     </div>
-    <span class="badge badge-purple">⏸ รอ ฝมธ. ตรวจสอบ</span>
+    <span class="badge badge-purple"><svg class="icon"><use href="#i-pause"/></svg>รอ ฝมธ. ตรวจสอบ</span>
   </div>
 
   <!-- Card 5 -->
@@ -422,7 +467,7 @@
       <div class="card-title">เว็บกองสถานีไฟฟ้า</div>
       <div class="card-sub"></div>
     </div>
-    <span class="badge badge-yellow">⏳ กำลังดำเนินงาน</span>
+    <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>กำลังดำเนินงาน</span>
   </div>
 
 </div>
@@ -437,7 +482,7 @@
   <!-- Personal 1 -->
   <div class="scroll-card" onclick="openModal('modalp1')">
     <div class="card-icon-wrap">P1</div>
-    <span class="badge badge-green">✓ เสร็จแล้ว</span>
+    <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
     <div class="card-title">Pebble Finance</div>
     <div class="card-sub">pebble-familyfinance.techstatcore.com</div>
   </div>
@@ -445,7 +490,7 @@
   <!-- Personal 2 -->
   <div class="scroll-card" onclick="openModal('modalp2')">
     <div class="card-icon-wrap">P2</div>
-    <span class="badge badge-green">✓ เสร็จแล้ว</span>
+    <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
     <div class="card-title">Acorn Finance</div>
     <div class="card-sub">acorn-finance.techstatcore.com</div>
   </div>
@@ -453,7 +498,7 @@
   <!-- Personal 3 -->
   <div class="scroll-card" onclick="openModal('modalp3')">
     <div class="card-icon-wrap">P3</div>
-    <span class="badge badge-green">✓ เสร็จแล้ว</span>
+    <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
     <div class="card-title">VaultNotebook</div>
     <div class="card-sub">vaultnotebook.web.app</div>
   </div>
@@ -461,7 +506,7 @@
   <!-- Personal 4 -->
   <div class="scroll-card" onclick="openModal('modalp4')">
     <div class="card-icon-wrap">P4</div>
-    <span class="badge badge-green">✓ เสร็จแล้ว</span>
+    <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
     <div class="card-title">Suantarach</div>
     <div class="card-sub">suantarachorder.web.app</div>
   </div>
@@ -469,7 +514,7 @@
   <!-- Personal 5 -->
   <div class="scroll-card" onclick="openModal('modalp5')">
     <div class="card-icon-wrap">P5</div>
-    <span class="badge badge-yellow">⏳ ระหว่างดำเนินการ</span>
+    <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>ระหว่างดำเนินการ</span>
     <div class="card-title">MySite-Log</div>
     <div class="card-sub">mysite-log.web.app</div>
   </div>
@@ -483,7 +528,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-yellow">⏳ อยู่ระหว่างดำเนินงาน</span>
+        <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>อยู่ระหว่างดำเนินงาน</span>
       </div>
       <div class="modal-title">KPI Dashboard PCD ปี 2569</div>
       <div class="modal-sub">แดชบอร์ดติดตาม KPI สำหรับปีงบประมาณ 2569</div>
@@ -508,7 +553,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-yellow">⏳ อยู่ระหว่างดำเนินงาน</span>
+        <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>อยู่ระหว่างดำเนินงาน</span>
       </div>
       <div class="modal-title">ติดตามงาน กสฟ.</div>
       <div class="modal-sub">ระบบติดตามงานสำหรับกองสายส่งและฝ่ายต่างๆ</div>
@@ -533,7 +578,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-blue">🧪 ทดลองการใช้งาน / เก็บ Feedback</span>
+        <span class="badge badge-blue"><svg class="icon"><use href="#i-flask"/></svg>ทดลองการใช้งาน / เก็บ Feedback</span>
       </div>
       <div class="modal-title">สมุดบันทึก ศูนย์รักษาความปลอดภัยฯ</div>
       <div class="modal-sub">สมุดบันทึกดิจิทัลสำหรับศูนย์รักษาความปลอดภัยสถานีไฟฟ้า</div>
@@ -558,7 +603,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-green">✓ เสร็จแล้ว</span>
+        <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
       </div>
       <div class="modal-title">Pebble Finance</div>
       <div class="modal-sub">ระบบจัดการการเงินครอบครัว</div>
@@ -581,7 +626,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-green">✓ เสร็จแล้ว</span>
+        <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
       </div>
       <div class="modal-title">Acorn Finance</div>
       <div class="modal-sub">ระบบจัดการการเงิน</div>
@@ -604,7 +649,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-green">✓ เสร็จแล้ว</span>
+        <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
       </div>
       <div class="modal-title">VaultNotebook</div>
       <div class="modal-sub">สมุดบันทึกดิจิทัล</div>
@@ -627,7 +672,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-green">✓ เสร็จแล้ว</span>
+        <span class="badge badge-green"><svg class="icon"><use href="#i-check"/></svg>เสร็จแล้ว</span>
       </div>
       <div class="modal-title">Suantarach</div>
       <div class="modal-sub">ระบบรับออเดอร์ สวนตะรัจ</div>
@@ -650,7 +695,7 @@
     <div class="modal-handle"></div>
     <div class="modal-header">
       <div class="modal-badge-row">
-        <span class="badge badge-yellow">⏳ ระหว่างดำเนินการ</span>
+        <span class="badge badge-yellow"><svg class="icon"><use href="#i-progress"/></svg>ระหว่างดำเนินการ</span>
       </div>
       <div class="modal-title">MySite-Log</div>
       <div class="modal-sub">แอปติดตามงานก่อสร้าง</div>
